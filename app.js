@@ -31,7 +31,7 @@ function getChargeLocations() {
       maxresults: 10,
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
-      distance: 50;
+      distance: 50,
       distanceunit: Miles,
       includecomments: true,
     };

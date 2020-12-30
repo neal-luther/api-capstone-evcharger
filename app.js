@@ -1,7 +1,7 @@
 'use strict';
 
 const apiKey = 'cbb52dca-f8f3-4c23-a420-14a4cb443a65'; 
-const searchURL = 'https://api.openchargemap.io/v3/';
+const searchURL = 'https://api.openchargemap.io/v3/poi/';
 
 
 /*----------------------------Get Location----------------------------*/
@@ -26,7 +26,7 @@ function formatQueryParams(params) {
 
 /*----------------------------Get Data----------------------------*/
 
-function getChargeLocations(/*?*/) {  //How/what do I pass here??  
+function getChargeLocations() {
     const params = {
       maxresults: 10,
       latitude: position.coords.latitude,

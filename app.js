@@ -3,22 +3,6 @@
 const apiKey = 'cbb52dca-f8f3-4c23-a420-14a4cb443a65'; 
 const searchURL = 'https://api.openchargemap.io/v3/poi/';
 
-
-/*----------------------------Get Location----------------------------*/
-
-function getPosition() {
-    if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position);
-            return position;
-        });
-    } else {
-        alert("Sorry, your browser does not support geolocation.");
-    }
-}
-
-/*----------------------------Format URL----------------------------*/
-
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
@@ -27,15 +11,19 @@ function formatQueryParams(params) {
 
 /*----------------------------Get Data----------------------------*/
 
-async function getChargeLocations() {
-    let pos = await getPosition();
-    console.log(pos);
+function getChargeLocations() {
+  navigator.geolocation.getCurrentPosition(pos => {
+    getData(pos)
+  })
+}
+
+  function getData(pos) {
     const params = {
       maxresults: 10,
       latitude: pos.coords.latitude,
       longitude: pos.coords.longitude,
       distance: 50,
-      distanceunit: Miles,
+      distanceunit: "Miles",
       includecomments: true,
     };
     const queryString = formatQueryParams(params)
@@ -54,19 +42,16 @@ async function getChargeLocations() {
       });
   }
 
-/*----------------------------Display Charging Locations----------------------------*/
+/*----------------------------Display Charging Locations--------FIGURE OUT MAPS LINK AND ROUNDING TO WHOLE NUMBER FOR MILES--------------------*/
 
 function displayChargeLocations(responseJson){
     console.log(responseJson);
     let placeHolder = [];
-for (let i=0; i<responseJson.data.length; i++) {
+for (let i=0; i < responseJson.length; i++) {
     placeHolder.push(`
-    <h1>${responseJson.data[i].AddressInfo.Title}</h1>
-    <h2>${responseJson.data[i].OperatorInfo.WebsiteUrl}</h2>
-    <h3>${responseJson.data[i].AddressInfo.AddressLine1}</h3>
-    <h3>${responseJson.data[i].AddressInfo.AddressLine2}</h3>
-    <h3>${responseJson.data[i].AddressInfo.Town}</h3>
-    <h3>${responseJson.data[i].AddressInfo.StateOrProvince}</h3>
+    <br><h3>${responseJson[i].AddressInfo.Title}</h3>
+    <p>${responseJson[i].AddressInfo.AddressLine1}, ${responseJson[i].AddressInfo.Town}, ${responseJson[i].AddressInfo.StateOrProvince}, ${responseJson[i].AddressInfo.Postcode}</p>
+    <p><strong>Distance:</strong>${responseJson[i].AddressInfo.Distance}<p><br> 
     `)
     $('.js-results-list').html(placeHolder);
     $('.js-results-list').removeClass('hidden');
@@ -78,11 +63,9 @@ for (let i=0; i<responseJson.data.length; i++) {
   function watchForm() {
     $('form').submit(event => {
       event.preventDefault();
-      //const maxDistance = $('#js-max-distance').val();  ADD FEATURE LATER
+      //const maxDistance = $('#js-max-distance').val();  ADD FEATURE L
       getChargeLocations();
     });
   }
   
   $(watchForm);
-
-  

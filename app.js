@@ -9,6 +9,7 @@ const searchURL = 'https://api.openchargemap.io/v3/poi/';
 function getPosition() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position);
             return position;
         });
     } else {

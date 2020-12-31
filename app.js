@@ -14,8 +14,8 @@ function getPosition() {
     } else {
         alert("Sorry, your browser does not support geolocation.");
     }
-    var lat=position.coords.latitude;
-    var long=position.coords.longitude;
+    const lat=position.coords.latitude;
+    const long=position.coords.longitude;
 }
 
 /*----------------------------Format URL----------------------------*/

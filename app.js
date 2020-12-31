@@ -9,13 +9,11 @@ const searchURL = 'https://api.openchargemap.io/v3/poi/';
 function getPosition() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position.coords.latitude + "," + position.coords.longitude);//logs location to console
+            return position;
         });
     } else {
         alert("Sorry, your browser does not support geolocation.");
     }
-    const lat=position.coords.latitude;
-    const long=position.coords.longitude;
 }
 
 /*----------------------------Format URL----------------------------*/
@@ -31,8 +29,8 @@ function formatQueryParams(params) {
 function getChargeLocations() {
     const params = {
       maxresults: 10,
-      latitude: lat,
-      longitude: long,
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
       distance: 50,
       distanceunit: Miles,
       includecomments: true,
@@ -78,7 +76,7 @@ for (let i=0; i<responseJson.data.length; i++) {
     $('form').submit(event => {
       event.preventDefault();
       //const maxDistance = $('#js-max-distance').val();  ADD FEATURE LATER
-      getChargeLocations();
+      getChargeLocations(position);
     });
   }
   

@@ -27,10 +27,12 @@ function formatQueryParams(params) {
 /*----------------------------Get Data----------------------------*/
 
 function getChargeLocations() {
+    let pos = await getPosition();
+    console.log(pos);
     const params = {
       maxresults: 10,
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
+      latitude: pos.coords.latitude,
+      longitude: pos.coords.longitude,
       distance: 50,
       distanceunit: Miles,
       includecomments: true,
@@ -76,7 +78,7 @@ for (let i=0; i<responseJson.data.length; i++) {
     $('form').submit(event => {
       event.preventDefault();
       //const maxDistance = $('#js-max-distance').val();  ADD FEATURE LATER
-      getChargeLocations(position);
+      getChargeLocations();
     });
   }
   

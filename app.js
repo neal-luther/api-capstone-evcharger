@@ -26,7 +26,7 @@ function formatQueryParams(params) {
 
 /*----------------------------Get Data----------------------------*/
 
-function getChargeLocations() {
+async function getChargeLocations() {
     let pos = await getPosition();
     console.log(pos);
     const params = {

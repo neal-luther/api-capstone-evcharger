@@ -14,6 +14,8 @@ function getPosition() {
     } else {
         alert("Sorry, your browser does not support geolocation.");
     }
+    var lat=position.coords.latitude;
+    var long=position.coords.longitude;
 }
 
 /*----------------------------Format URL----------------------------*/
@@ -29,8 +31,8 @@ function formatQueryParams(params) {
 function getChargeLocations() {
     const params = {
       maxresults: 10,
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
+      latitude: lat,
+      longitude: long,
       distance: 50,
       distanceunit: Miles,
       includecomments: true,
@@ -76,7 +78,7 @@ for (let i=0; i<responseJson.data.length; i++) {
     $('form').submit(event => {
       event.preventDefault();
       //const maxDistance = $('#js-max-distance').val();  ADD FEATURE LATER
-      getChargeLocations(position);
+      getChargeLocations();
     });
   }
   

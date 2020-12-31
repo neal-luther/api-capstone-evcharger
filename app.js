@@ -76,7 +76,7 @@ for (let i=0; i<responseJson.data.length; i++) {
     $('form').submit(event => {
       event.preventDefault();
       //const maxDistance = $('#js-max-distance').val();  ADD FEATURE LATER
-      getChargeLocations();
+      getChargeLocations(position);
     });
   }
   

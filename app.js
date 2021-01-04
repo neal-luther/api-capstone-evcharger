@@ -66,9 +66,7 @@ for (let i=0; i < responseJson.length; i++) {
   function watchForm() {
     $('form').submit(event => {
       event.preventDefault();
-      //const maxDistance = $('#js-max-distance').val();
       getChargeLocations();
-      //console.log(maxDistance);
     });
   }
   

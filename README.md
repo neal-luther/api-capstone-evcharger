@@ -17,4 +17,4 @@ Gets EV Charger locations based on current location within a 50 mile radius.  Di
 [Charge Me Up](https://neal-luther.github.io/charge-me-up/)
 
 ### TECHNOLOGIES USED: 
-#### HTML, CSS, Javascript and jQuery.
+HTML, CSS, Javascript and jQuery.

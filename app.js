@@ -2,6 +2,7 @@
 
 const apiKey = 'cbb52dca-f8f3-4c23-a420-14a4cb443a65'; 
 const searchURL = 'https://api.openchargemap.io/v3/poi/';
+const mapURL = 'https://www.google.com/maps/dir/?api=1&query='
 
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
@@ -17,7 +18,7 @@ function getChargeLocations() {
   })
 }
 
-  function getData(pos) {
+function getData(pos, maxDistance) {
     const params = {
       maxresults: 10,
       latitude: pos.coords.latitude,
@@ -51,10 +52,12 @@ for (let i=0; i < responseJson.length; i++) {
     placeHolder.push(`
     <br><h3>${responseJson[i].AddressInfo.Title}</h3>
     <p>${responseJson[i].AddressInfo.AddressLine1}, ${responseJson[i].AddressInfo.Town}, ${responseJson[i].AddressInfo.StateOrProvince}, ${responseJson[i].AddressInfo.Postcode}</p>
-    <p><strong>Distance:</strong>${responseJson[i].AddressInfo.Distance}<p><br> 
+    <p><strong>Distance:</strong>${responseJson[i].AddressInfo.Distance}<p>
+    <p><a href="https://www.google.com/maps/dir/?api=1&destination=${responseJson[i].AddressInfo.Latitude}, ${responseJson[i].AddressInfo.Longitude}"target="_blank">Take Me There</a></p>
     `)
     $('.js-results-list').html(placeHolder);
     $('.js-results-list').removeClass('hidden');
+    $('form').addClass('hidden');
 }
 }
 
@@ -63,8 +66,9 @@ for (let i=0; i < responseJson.length; i++) {
   function watchForm() {
     $('form').submit(event => {
       event.preventDefault();
-      //const maxDistance = $('#js-max-distance').val();  ADD FEATURE L
+      //const maxDistance = $('#js-max-distance').val();
       getChargeLocations();
+      //console.log(maxDistance);
     });
   }
   

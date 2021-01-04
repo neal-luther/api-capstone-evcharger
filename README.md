@@ -8,6 +8,9 @@ Simple interfaced EV Charger finder based on current location, for the electro-t
 ### SCREENSHOTS
 
 ![Homepage](/images/Charge-Me-Up-Home.png)
+
+-----------------------------------------
+
 ![Results Screen](/images/Charge-Me-Up-Results.png)
 
 ### API: 
